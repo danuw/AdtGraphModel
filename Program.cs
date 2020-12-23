@@ -30,11 +30,36 @@ namespace AdtModelsGraph
                 var model = JsonConvert.DeserializeObject<Root>(myJsonString);
                 
                 if(model.extends !=null)
-                foreach (var e in model.extends)
                 {
-                    sb.AppendLine($"    {GetName(model.Id)} <|-- {GetName(e)}");
+                    foreach (var e in model.extends)
+                    {
+                        sb.AppendLine($"    {GetName(model.Id)} <|-- {GetName(e)}");
+                    }
                 }
-                
+                else
+                {
+                    sb.AppendLine($"    class {GetName(model.Id)}{{");
+                    sb.AppendLine("    }");
+                }
+            
+                if(model.contents == null)
+                    continue;
+
+                foreach (var c in model.contents)
+                {
+                    var s = c.schema as string;
+                    if(c.Type.Contains("Relationship") )
+                    {
+                        sbProps.AppendLine($"    {GetName(model.Id)} : +{c.name}()");
+                    }
+                    else if(s == null || s.Contains("{") || s.Contains(":")){ // Complex type
+                        sbProps.AppendLine($"    {GetName(model.Id)} : +Object {c.name}");
+                    }
+                    else
+                    {
+                        sbProps.AppendLine($"    {GetName(model.Id)} : +{c.schema} {c.name}");
+                    }   
+                }
             }
 
             var mermaidPath = Path.Combine(currentDir, "mermaid.mmd");
