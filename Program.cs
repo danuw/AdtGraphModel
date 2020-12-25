@@ -15,7 +15,7 @@ namespace AdtModelsGraph
             Console.WriteLine("Hello World!");
 
             var currentDir = Directory.GetCurrentDirectory();
-            var docPath = Path.Combine(currentDir, "Ontology/Asset/Equipment/HVACEquipment/");
+            var docPath = Path.Combine(currentDir, "Models");// "Ontology/Asset/Equipment/HVACEquipment/");
             
             var models = Directory.EnumerateFiles(docPath, "*.json", SearchOption.AllDirectories);
 
@@ -91,7 +91,7 @@ namespace AdtModelsGraph
             public string name { get; set; } 
             [JsonProperty("@type")]
             public string Type { get; set; } 
-            public string schema { get; set; } 
+            public Object schema { get; set; } 
         }
         public class Description    {
             public string en { get; set; } 
@@ -104,10 +104,10 @@ namespace AdtModelsGraph
         public class Content    {
             [JsonProperty("@type")]
             public Object Type { get; set; } 
-            public Description description { get; set; } 
-            public DisplayName displayName { get; set; } 
+            //public Description description { get; set; } 
+            //public DisplayName displayName { get; set; } 
             public string name { get; set; } 
-            public string schema { get; set; } 
+            public object schema { get; set; } 
             public bool writable { get; set; } 
             public string target { get; set; } 
             public List<Property> properties { get; set; } 
