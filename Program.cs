@@ -15,7 +15,7 @@ namespace AdtModelsGraph
             Console.WriteLine("Hello World!");
 
             var currentDir = Directory.GetCurrentDirectory();
-            var docPath = Path.Combine(currentDir, "Ontology");
+            var docPath = Path.Combine(currentDir, "Ontology/Asset/Equipment/HVACEquipment/");
             
             var models = Directory.EnumerateFiles(docPath, "*.json", SearchOption.AllDirectories);
 
